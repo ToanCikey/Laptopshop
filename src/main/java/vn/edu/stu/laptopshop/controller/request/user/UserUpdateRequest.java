@@ -1,9 +1,6 @@
 package vn.edu.stu.laptopshop.controller.request.user;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import vn.edu.stu.laptopshop.common.UserStatus;
@@ -11,14 +8,10 @@ import vn.edu.stu.laptopshop.common.UserType;
 
 @Getter
 @Setter
-public class UserCreateRequest {
-    @Email
-    @NotBlank(message = "Email must be not blank")
-    private String email;
-
-    @NotBlank(message = "Password must be not blank")
-    @Size(min = 6, message = "Password minimum 6 characters")
-    private String password;
+public class UserUpdateRequest {
+    @NotNull(message = "Id must be not null")
+    @Min(value = 1, message = "Id must be at least 1")
+    private Long id;
 
     @NotBlank(message = "FullName must be not blank")
     @Size(min = 3, message = "FullName minimum 3 characters")

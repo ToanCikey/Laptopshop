@@ -1,13 +1,14 @@
 package vn.edu.stu.laptopshop.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import vn.edu.stu.laptopshop.common.UserStatus;
+import vn.edu.stu.laptopshop.common.UserType;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -17,6 +18,9 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name = "tbl_user")
 public class UserEntity implements Serializable, UserDetails {
     @Id
@@ -24,7 +28,7 @@ public class UserEntity implements Serializable, UserDetails {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "email", length = 255)
+    @Column(name = "email", length = 255, unique = true)
     private String email;
 
     @Column(name = "username", length = 255)
@@ -33,18 +37,25 @@ public class UserEntity implements Serializable, UserDetails {
     @Column(name = "password", length = 255)
     private String password;
 
-    @Column(name = "firstName", length = 255)
-    private String firstName;
-
-    @Column(name = "lastName", length = 255)
-    private String lastName;
+    @Column(name = "fullName", length = 255)
+    private String fullName;
 
     @Column(name = "phone", length = 255)
     private String phone;
 
+    @Column(name = "address", length = 255)
+    private String address;
+
+    @Column(name = "image", length = 255)
+    private String image;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 255)
     private UserStatus status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", length = 255)
+    private UserType type;
 
     @Column(name = "created_at", updatable = false, nullable = false)
     @CreationTimestamp
@@ -54,9 +65,12 @@ public class UserEntity implements Serializable, UserDetails {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<OrderEntity> orders;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return List.of(new SimpleGrantedAuthority(this.type.name()));
     }
 
     @Override
@@ -76,7 +90,7 @@ public class UserEntity implements Serializable, UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
+        return UserStatus.ACTIVE.equals(status);
     }
 
 }

@@ -1,6 +1,5 @@
 package vn.edu.stu.laptopshop.controller.request.product;
 
-
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +9,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProductCreateRequest {
+public class ProductUpdateRequest {
+    @NotNull(message = "Id must be not null")
+    @Min(value = 0, message = "CategoryId must be at least 0")
+    private Long id;
+
     @NotBlank(message = "Name must be not blank")
     @Size(min = 5, message = "Name minimum 5 characters")
     private String name;
@@ -26,12 +29,12 @@ public class ProductCreateRequest {
     private String image;
 
     @NotNull(message = "StockQuantity must be not null")
-    @Min(value = 1, message = "StockQuantity must be at least 0")
+    @Min(value = 0, message = "StockQuantity must be at least 0")
     private Long stockQuantity;
 
-    @Min(value = 1, message = "BrandId must be at least 0")
+    @Min(value = 0, message = "BrandId must be at least 0")
     private Long brandId;
 
-    @Min(value = 1, message = "CategoryId must be at least 0")
+    @Min(value = 0, message = "CategoryId must be at least 0")
     private Long categoryId;
 }
