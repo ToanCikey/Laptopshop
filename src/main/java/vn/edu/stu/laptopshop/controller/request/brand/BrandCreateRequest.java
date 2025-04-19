@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 public class BrandCreateRequest {
     @NotBlank(message = "Name must be not blank")
-    @Size(min = 3, message = "Name minimum 3 characters")
+    @Size(min = 2, message = "Name minimum 3 characters")
     private String name;
 }

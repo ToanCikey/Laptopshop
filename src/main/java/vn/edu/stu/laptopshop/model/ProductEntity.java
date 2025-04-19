@@ -46,7 +46,7 @@ public class ProductEntity implements Serializable {
     private CategoryEntity category;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<OrderDetailEntity> orderDetails;
+    private List<OrderDetailEntity> orderDetails;
 
     @Column(name = "created_at", updatable = false, nullable = false)
     @CreationTimestamp

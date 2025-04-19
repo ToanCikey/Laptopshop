@@ -21,9 +21,9 @@ public class OrderMapper {
         if(orderEntity.getUser() != null) {
             orderResponse.setUserId(orderEntity.getUser().getId());
         }
-        if(!orderEntity.getOrderDetails().isEmpty()) {
-            orderResponse.setOrderDetails(orderEntity.getOrderDetails().stream().map(order ->
-                    modelMapper.map(order, OrderDetailResponse.class))
+        if (orderEntity.getOrderDetails() != null && !orderEntity.getOrderDetails().isEmpty()) {
+            orderResponse.setOrderDetails(orderEntity.getOrderDetails().stream()
+                    .map(order -> modelMapper.map(order, OrderDetailResponse.class))
                     .toList());
         }
         return orderResponse;

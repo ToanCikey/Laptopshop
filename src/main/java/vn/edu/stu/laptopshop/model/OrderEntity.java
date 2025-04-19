@@ -1,5 +1,6 @@
 package vn.edu.stu.laptopshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,7 +29,8 @@ public class OrderEntity {
     @Column(name = "totalAmount")
     private Double totalAmount;
 
-    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", length = 255)
     private OrderStatus status;
 
     @Column(name = "reason", length = 255)
@@ -44,8 +46,9 @@ public class OrderEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private UserEntity user;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<OrderDetailEntity> orderDetails;
+    private List<OrderDetailEntity> orderDetails;
 }

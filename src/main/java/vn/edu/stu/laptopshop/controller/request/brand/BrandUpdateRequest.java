@@ -15,6 +15,6 @@ public class BrandUpdateRequest {
     private Long id;
 
     @NotBlank(message = "Name must be not blank")
-    @Size(min = 3, message = "Name minimum 3 characters")
+    @Size(min = 2, message = "Name minimum 3 characters")
     private String name;
 }

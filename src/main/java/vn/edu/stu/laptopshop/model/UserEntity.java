@@ -66,7 +66,7 @@ public class UserEntity implements Serializable, UserDetails {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<OrderEntity> orders;
+    private List<OrderEntity> orders;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

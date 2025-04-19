@@ -20,7 +20,7 @@ public class OrderDetailEntity {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "orderDate")
+    @Column(name = "quantity")
     private Long quantity;
 
     @Column(name = "unitPrice")

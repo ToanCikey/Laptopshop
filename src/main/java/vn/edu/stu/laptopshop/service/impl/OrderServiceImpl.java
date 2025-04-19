@@ -18,6 +18,7 @@ import vn.edu.stu.laptopshop.repository.ProductRepository;
 import vn.edu.stu.laptopshop.repository.UserRepository;
 import vn.edu.stu.laptopshop.service.OrderService;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,6 +48,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         double totalAmount = 0;
+        List<OrderDetailEntity> listOrderDetail = new ArrayList<>();
         for(OrderItemRequest order : request.getItems()) {
             ProductEntity productEntity = productRepository.findById(order.getProductId()).orElseThrow(()->
                     new ResourceNotFoundException("Product id" + order.getProductId() + " not found"));
@@ -65,8 +67,11 @@ public class OrderServiceImpl implements OrderService {
             orderDetailRepository.save(orderDetailEntity);
 
             totalAmount += productEntity.getPrice() * order.getQuantity();
+            listOrderDetail.add(orderDetailEntity);
         }
         orderEntity.setTotalAmount(totalAmount);
+        orderEntity.setOrderDetails(listOrderDetail);
+
         orderRepository.save(orderEntity);
 
         return orderEntity;
@@ -156,4 +161,5 @@ public class OrderServiceImpl implements OrderService {
 
         return orderEntity;
     }
+
 }

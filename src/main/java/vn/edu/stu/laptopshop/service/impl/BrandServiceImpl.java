@@ -54,7 +54,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public BrandEntity getBrandById(Long id) {
-        return brandRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Brand id" + id + " not found"));
+        return brandRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Brand id " + id + " not found"));
     }
 
     @Override
