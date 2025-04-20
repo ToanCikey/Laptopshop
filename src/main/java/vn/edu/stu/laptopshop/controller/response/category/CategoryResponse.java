@@ -1,4 +1,4 @@
-package vn.edu.stu.laptopshop.controller.response;
+package vn.edu.stu.laptopshop.controller.response.category;
 
 
 import lombok.Getter;

@@ -3,7 +3,7 @@ package vn.edu.stu.laptopshop.mapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import vn.edu.stu.laptopshop.controller.response.BrandResponse;
+import vn.edu.stu.laptopshop.controller.response.brand.BrandResponse;
 import vn.edu.stu.laptopshop.model.BrandEntity;
 
 import java.util.List;

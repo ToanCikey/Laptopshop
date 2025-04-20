@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import vn.edu.stu.laptopshop.controller.request.LoginRequest;
 import vn.edu.stu.laptopshop.controller.request.user.UserCreateRequest;
 import vn.edu.stu.laptopshop.controller.response.ResponseSuccess;
-import vn.edu.stu.laptopshop.controller.response.UserResponse;
+import vn.edu.stu.laptopshop.controller.response.user.UserResponse;
 import vn.edu.stu.laptopshop.mapper.UserMapper;
 import vn.edu.stu.laptopshop.model.UserEntity;
 import vn.edu.stu.laptopshop.service.AuthService;
