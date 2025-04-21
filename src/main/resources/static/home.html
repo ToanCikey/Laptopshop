@@ -1,89 +1,599 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh sách sản phẩm</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang chủ - Laptopshop</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 font-sans">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <header class="bg-white shadow sticky top-0 z-50">
+      <div
+        class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <h1 class="text-2xl font-bold text-blue-600 cursor-pointer text-[30px]">
+          <a href="home.html">Laptopshop</a>
+        </h1>
 
-<div class="max-w-7xl mx-auto p-6">
-    <div class="flex items-center gap-2 mb-6 bg-white p-4 rounded-xl shadow-md">
-        <input type="text" id="search" placeholder="Nhập từ khóa tìm kiếm..."
-               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none text-lg">
-        <button id="searchBtn" class="px-6 py-3 min-w-[120px] bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition text-lg flex justify-center items-center whitespace-nowrap">
-            Tìm kiếm
-        </button>
-    </div>
+        <nav class="space-x-4 text-lg flex items-center justify-between">
+          <nav class="flex items-center justify-center space-x-4 mr-[100px]">
+            <a
+              href="home.html"
+              id="nav-home"
+              class="text-gray-700 text-[20px] font-bold hover:text-blue-500 mr-2"
+              >Trang chủ</a
+            >
+            <a
+              href="#"
+              id="nav-products"
+              class="text-gray-700 text-[20px] font-bold hover:text-blue-500 mr-2"
+              >Sản phẩm</a
+            >
+            <a
+              href="#"
+              id="nav-contact"
+              class="text-gray-700 text-[20px] font-bold hover:text-blue-500 mr-2"
+              >Liên hệ</a
+            >
+          </nav>
+          <nav class="flex items-center justify-center space-x-4">
+            <div class="relative">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                class="text-black"
+              >
+                <path
+                  fill="currentColor"
+                  d="M0 1h4.764l.545 2h18.078l-3.666 11H7.78l-.5 2H22v2H4.72l1.246-4.989L3.236 3H0zm7.764 11h10.515l2.334-7H5.855zM4 21a2 2 0 1 1 4 0a2 2 0 0 1-4 0m14 0a2 2 0 1 1 4 0a2 2 0 0 1-4 0"
+                />
+              </svg>
 
-    <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    </div>
-</div>
+              <div
+                id="cart-count"
+                class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full"
+              >
+                0
+              </div>
+            </div>
 
-<script>
-    let products = [];
+            <a href="register.html" id="nav-register">
+              <button
+                class="bg-green-500 text-white px-5 py-2 rounded-xl shadow-md hover:bg-green-600 transition-all font-semibold"
+              >
+                Đăng ký
+              </button>
+            </a>
 
-    async function fetchProducts(keyword = "") {
+            <a href="login.html" id="nav-login">
+              <button
+                class="bg-blue-500 text-white px-5 py-2 rounded-xl shadow-md hover:bg-blue-600 transition-all font-semibold"
+              >
+                Đăng nhập
+              </button>
+            </a>
+
+            <div class="relative" id="avatar-wrapper">
+              <div
+                id="avatar-container"
+                class="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500 hover:scale-105 transition-transform duration-300 cursor-pointer"
+              ></div>
+
+              <div
+                id="dropdown-menu"
+                class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg z-50 py-2 text-gray-700 border"
+              >
+                <a href="info.html" class="block px-4 py-2 hover:bg-gray-100"
+                  >Thông tin cá nhân</a
+                >
+                <a href="order.html" class="block px-4 py-2 hover:bg-gray-100"
+                  >Đơn hàng của tôi</a
+                >
+                <button
+                  id="logoutBtn"
+                  class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  Đăng xuất
+                </button>
+              </div>
+            </div>
+          </nav>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-6">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <aside
+          class="lg:col-span-1 bg-white p-4 rounded-xl shadow-md h-fit max-h-[80vh] overflow-y-auto"
+        >
+          <h2 class="text-xl font-bold mb-4 text-gray-800">Bộ lọc sản phẩm</h2>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-semibold mb-2"
+              >Hãng sản xuất</label
+            >
+            <div>
+              <label class="block">
+                <input type="checkbox" class="mr-2" value="Asus" name="brand" />
+                Asus
+              </label>
+              <label class="block">
+                <input type="checkbox" class="mr-2" value="Dell" name="brand" />
+                Dell
+              </label>
+              <label class="block">
+                <input type="checkbox" class="mr-2" value="HP" name="brand" />
+                HP
+              </label>
+              <label class="block">
+                <input
+                  type="checkbox"
+                  class="mr-2"
+                  value="Lenovo"
+                  name="brand"
+                />
+                Lenovo
+              </label>
+              <label class="block">
+                <input type="checkbox" class="mr-2" value="Acer" name="brand" />
+                Acer
+              </label>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-semibold mb-2"
+              >Mục đích sử dụng</label
+            >
+            <div>
+              <label class="block">
+                <input
+                  type="checkbox"
+                  class="mr-2"
+                  name="usage"
+                  value="Văn phòng"
+                />
+                Văn phòng
+              </label>
+              <label class="block">
+                <input
+                  type="checkbox"
+                  class="mr-2"
+                  name="usage"
+                  value="Gaming"
+                />
+                Gaming
+              </label>
+              <label class="block">
+                <input
+                  type="checkbox"
+                  class="mr-2"
+                  name="usage"
+                  value="Học tập"
+                />
+                Học tập
+              </label>
+              <label class="block">
+                <input
+                  type="checkbox"
+                  class="mr-2"
+                  name="usage"
+                  value="Đồ họa - Kỹ thuật"
+                />
+                Đồ họa - Kỹ thuật
+              </label>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-semibold mb-2"
+              >Mức giá</label
+            >
+            <div>
+              <label class="block">
+                <input
+                  type="checkbox"
+                  class="mr-2"
+                  name="price"
+                  value="0-9999999"
+                />
+                Dưới 10 triệu
+              </label>
+              <label class="block">
+                <input
+                  type="checkbox"
+                  class="mr-2"
+                  name="price"
+                  value="10000000-14999999"
+                />
+                Từ 10 - Dưới 15 triệu
+              </label>
+              <label class="block">
+                <input
+                  type="checkbox"
+                  class="mr-2"
+                  name="price"
+                  value="15000000-19999999"
+                />
+                Từ 15 - Dưới 20 triệu
+              </label>
+              <label class="block">
+                <input
+                  type="checkbox"
+                  class="mr-2"
+                  name="price"
+                  value="20000000-29999999"
+                />
+                Từ 20 - Dưới 30 triệu
+              </label>
+              <label class="block">
+                <input
+                  type="checkbox"
+                  class="mr-2"
+                  name="price"
+                  value="30000000-100000000"
+                />
+                Trên 30 triệu
+              </label>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-semibold mb-2"
+              >Sắp xếp</label
+            >
+            <div>
+              <label class="block">
+                <input
+                  type="radio"
+                  name="sort"
+                  class="mr-2"
+                  value="asc"
+                  checked
+                />
+                Giá tăng dần
+              </label>
+              <label class="block">
+                <input type="radio" name="sort" class="mr-2" value="desc" />
+                Giá giảm dần
+              </label>
+            </div>
+          </div>
+
+          <button
+            id="filter-product"
+            class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-all"
+          >
+            Áp dụng
+          </button>
+        </aside>
+
+        <section class="lg:col-span-4">
+          <div
+            class="flex items-center gap-4 mb-2 bg-white p-4 rounded-xl shadow-lg"
+          >
+            <input
+              type="text"
+              id="search"
+              placeholder="Nhập từ khóa tìm kiếm..."
+              class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-lg shadow-sm transition-all"
+            />
+            <button
+              id="searchBtn"
+              class="px-6 py-3 min-w-[120px] bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-all"
+            >
+              Tìm kiếm
+            </button>
+          </div>
+
+          <div
+            class="py-4 px-4 rounded-xl flex items-center gap-2 text-gray-700 text-base md:text-lg font-semibold"
+          >
+            Kết quả tìm kiếm:
+            <span id="result" class="text-red-600 font-bold text-lg">0</span>
+            sản phẩm
+          </div>
+
+          <div
+            id="product-list"
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+          ></div>
+
+          <div class="flex justify-center mt-8">
+            <nav
+              class="flex items-center gap-1 rounded-xl shadow-lg bg-white px-2 py-1"
+              aria-label="Pagination"
+            >
+              <a
+                href="#"
+                class="p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-all"
+                id="prevPage"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </a>
+              <span id="pageNumbers" class="flex gap-1"></span>
+
+              <a
+                href="#"
+                class="p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-all"
+                id="nextPage"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </a>
+            </nav>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="bg-white border-t mt-10 py-6 text-center text-gray-600">
+      &copy; 2025 Laptopshop. Bản quyền thuộc về Nguyễn Văn Toàn
+    </footer>
+
+    <script>
+      let products = [];
+      let responseData = {};
+
+      //lấy các giá trị bộ lọc
+      function getFilterRequest(page = 0) {
+        const keyword = document.getElementById("search").value;
+
+        const selectedBrands = Array.from(
+          document.querySelectorAll('input[name="brand"]:checked')
+        ).map((el) => el.value);
+
+        const selectedCategoryNames = Array.from(
+          document.querySelectorAll('input[name="usage"]:checked')
+        ).map((el) => el.value);
+
+        const selectedPrices = Array.from(
+          document.querySelectorAll('input[name="price"]:checked')
+        ).map((el) => {
+          const [min, max] = el.value.split("-").map(Number);
+          return { min, max };
+        });
+
+        const selectedSort = document.querySelector(
+          'input[name="sort"]:checked'
+        )?.value;
+
+        return {
+          keyword,
+          brandNames: selectedBrands,
+          categoryNames: selectedCategoryNames,
+          priceRanges: selectedPrices,
+          sort: selectedSort,
+          page,
+          size: 8,
+        };
+      }
+
+      //call api tìm kiếm và lọc sản phẩm
+      async function fetchProducts(filter = {}) {
         try {
-            let url = "http://localhost:8080/api/v1/product/list";
-            if (keyword) {
-                url += `?keyword=${encodeURIComponent(keyword)}`;
+          const response = await fetch(
+            "http://localhost:8080/api/v1/product/filter",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(filter),
             }
+          );
 
-            let response = await fetch(url, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
+          const data = await response.json();
 
-            let data = await response.json();
+          if (response.ok) {
+            products = data.data.products || [];
+            renderProducts();
 
-            if (response.ok) {
-                products = data.data || [];
-                renderProducts();
-            }
+            responseData = {
+              pageNumber: data.data.pageNumber,
+              totalPages: data.data.totalPages,
+            };
+            document.getElementById("result").textContent =
+              data.data.totalElements;
+            updatePagination();
+          }
         } catch (error) {
-            console.error("Lỗi:", error);
+          console.error("Lỗi:", error);
         }
-    }
+      }
 
-    function formatCurrency(amount) {
-        return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(amount);
-    }
+      //format giá tiền
+      function formatCurrency(amount) {
+        return new Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(amount);
+      }
 
-    function renderProducts() {
+      //hàm render product ra html
+      function renderProducts() {
         const productList = document.getElementById("product-list");
         productList.innerHTML = "";
 
         if (products.length === 0) {
-            productList.innerHTML = `<p class="text-gray-500 col-span-4 text-center text-lg">Không có sản phẩm nào</p>`;
-            return;
+          productList.innerHTML = `<p class="text-gray-500 col-span-4 text-center text-lg">Không có sản phẩm nào</p>`;
+          return;
         }
 
-        products.forEach(product => {
-            const productHTML = `
-                <div class="bg-white p-4 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer">
-                    <div class="relative overflow-hidden rounded-xl">
-                        <img src="${product.image}" alt="${product.name}" class="w-full h-52 object-cover rounded-lg transition transform hover:scale-105">
-                    </div>
-                    <h3 class="text-xl font-bold mt-3 text-gray-800 truncate">${product.name}</h3>
-                    <p class="text-gray-500 text-md mt-1">${product.brand || "Thương hiệu không xác định"}</p>
-                    <p class="text-lg font-semibold text-red-600 mt-2">${formatCurrency(product.price)}</p>
-                </div>
-            `;
-            productList.innerHTML += productHTML;
+        products.forEach((product) => {
+          const productHTML = `
+        <div class="bg-white p-4 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer">
+          <div class="relative overflow-hidden rounded-xl">
+            <img src="${product.image}" alt="${
+            product.name
+          }" class="w-full h-52 object-cover rounded-lg transition transform hover:scale-105">
+          </div>
+          <h3 class="text-xl font-bold mt-3 text-gray-800 truncate">${
+            product.name
+          }</h3>
+          <p class="text-gray-500 text-md mt-1">${
+            product.brand.name || "Thương hiệu không xác định"
+          }</p>
+          <p class="text-lg font-semibold text-red-600 mt-2">${formatCurrency(
+            product.price
+          )}</p>
+        </div>
+      `;
+          productList.innerHTML += productHTML;
         });
-    }
+      }
 
-    document.getElementById("searchBtn").addEventListener("click", () => {
-        const searchValue = document.getElementById("search").value;
-        fetchProducts(searchValue);
-    });
+      // hàm update trang
+      function updatePagination() {
+        const { pageNumber, totalPages } = responseData;
 
-    fetchProducts();
-</script>
+        const container = document.getElementById("pageNumbers");
+        container.innerHTML = "";
 
-</body>
+        for (let i = 0; i < totalPages; i++) {
+          const pageBtn = document.createElement("a");
+          pageBtn.innerText = i + 1;
+          pageBtn.href = "#";
+          pageBtn.classList.add(
+            "px-3",
+            "py-2",
+            "rounded-lg",
+            "text-gray-700",
+            "hover:bg-blue-100"
+          );
+
+          if (i === pageNumber) {
+            pageBtn.classList.add("bg-blue-600", "text-white", "font-semibold");
+          } else {
+            pageBtn.addEventListener("click", () => handlePageChange(i));
+          }
+
+          container.appendChild(pageBtn);
+        }
+
+        const prevBtn = document.getElementById("prevPage");
+        const nextBtn = document.getElementById("nextPage");
+
+        prevBtn.classList.toggle("text-gray-400", pageNumber === 0);
+        prevBtn.classList.toggle("text-gray-800", pageNumber !== 0);
+        prevBtn.onclick = () => {
+          if (pageNumber > 0) handlePageChange(pageNumber - 1);
+        };
+
+        nextBtn.classList.toggle(
+          "text-gray-400",
+          pageNumber === totalPages - 1
+        );
+        nextBtn.classList.toggle(
+          "text-gray-800",
+          pageNumber !== totalPages - 1
+        );
+        nextBtn.onclick = () => {
+          if (pageNumber < totalPages - 1) handlePageChange(pageNumber + 1);
+        };
+      }
+
+      function handlePageChange(page) {
+        const filter = getFilterRequest(page);
+        fetchProducts(filter);
+      }
+
+      document.getElementById("searchBtn").addEventListener("click", () => {
+        const filter = getFilterRequest(0);
+        fetchProducts(filter);
+      });
+
+      document
+        .getElementById("filter-product")
+        .addEventListener("click", () => {
+          const filter = getFilterRequest(0);
+          fetchProducts(filter);
+        });
+
+      // Avatar login + dropdown
+      const userInfo = localStorage.getItem("info");
+      const avatarContainer = document.getElementById("avatar-container");
+
+      if (userInfo) {
+        const parsedInfo = JSON.parse(userInfo);
+        document.getElementById("nav-register").style.display = "none";
+        document.getElementById("nav-login").style.display = "none";
+        avatarContainer.innerHTML = `<img src="${parsedInfo.image}" alt="Ảnh cá nhân" class="w-full h-full object-cover" />`;
+      } else {
+        document.getElementById("nav-register").style.display = "block";
+        document.getElementById("nav-login").style.display = "block";
+        document.getElementById("avatar-container").style.display = "none";
+      }
+
+      const path = window.location.pathname;
+      if (path.includes("home")) {
+        document
+          .getElementById("nav-home")
+          ?.classList.add("border-b-2", "border-red-900");
+      } else if (path.includes("products")) {
+        document
+          .getElementById("nav-products")
+          ?.classList.add("border-b-2", "border-blue-600");
+      } else if (path.includes("contact")) {
+        document
+          .getElementById("nav-contact")
+          ?.classList.add("border-b-2", "border-blue-600");
+      }
+
+      const avatar = document.getElementById("avatar-container");
+      const dropdown = document.getElementById("dropdown-menu");
+
+      avatar?.addEventListener("click", () => {
+        dropdown.classList.toggle("hidden");
+      });
+
+      window.addEventListener("click", function (e) {
+        if (!document.getElementById("avatar-wrapper")?.contains(e.target)) {
+          dropdown?.classList.add("hidden");
+        }
+      });
+
+      document.getElementById("logoutBtn")?.addEventListener("click", () => {
+        Swal.fire({
+          title: "Bạn có chắc chắn muốn đăng xuất?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Đăng xuất",
+          cancelButtonText: "Hủy",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            localStorage.removeItem("info");
+            window.location.href = "login.html";
+          }
+        });
+      });
+
+      fetchProducts(getFilterRequest(0));
+    </script>
+  </body>
 </html>

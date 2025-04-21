@@ -37,7 +37,7 @@ public class BrandController {
     }
 
     @Operation(summary = "Update Brand", description = "API update brand to database")
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseSuccess<?> updateBrand(@Valid @RequestBody BrandUpdateRequest request) {
         brandService.updateBrand(request);
 
@@ -45,7 +45,7 @@ public class BrandController {
     }
 
     @Operation(summary = "Delete brand", description = "API delete brand to database")
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseSuccess<?> deleteBrand(@Min(1) @PathVariable Long id) {
         brandService.deleteBrand(id);
 

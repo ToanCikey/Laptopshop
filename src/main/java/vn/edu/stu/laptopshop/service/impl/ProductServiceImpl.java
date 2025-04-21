@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import vn.edu.stu.laptopshop.controller.request.product.PriceRangeRequest;
 import vn.edu.stu.laptopshop.controller.request.product.ProductCreateRequest;
+import vn.edu.stu.laptopshop.controller.request.product.ProductFilterRequest;
 import vn.edu.stu.laptopshop.controller.request.product.ProductUpdateRequest;
 import vn.edu.stu.laptopshop.controller.response.product.ProductPageResponse;
 import vn.edu.stu.laptopshop.exception.InvalidDataException;
@@ -107,15 +108,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductPageResponse getProductPageBySearch(List<String> brandNames, List<String> categoryNames, List<PriceRangeRequest> priceRanges, String sort, int page, int size) {
+    public ProductPageResponse getProductPageBySearch(ProductFilterRequest request) {
         Specification<ProductEntity> spec = Specification
-                .where(ProductSpecification.filterByBrandNames(brandNames))
-                .and(ProductSpecification.filterByCategoryNames(categoryNames))
-                .and(ProductSpecification.filterByMultiplePriceRanges(priceRanges));
-        Sort.Direction direction = ("desc".equalsIgnoreCase(sort)) ? Sort.Direction.DESC : Sort.Direction.ASC;
+                .where(ProductSpecification.findByKeyWord(request.getKeyword()))
+                .and(ProductSpecification.filterByBrandNames(request.getBrandNames()))
+                .and(ProductSpecification.filterByCategoryNames(request.getCategoryNames()))
+                .and(ProductSpecification.filterByMultiplePriceRanges(request.getPriceRanges()));
+        Sort.Direction direction = ("desc".equalsIgnoreCase(request.getSort())) ? Sort.Direction.DESC : Sort.Direction.ASC;
         Sort sortBy = Sort.by(direction, "price");
 
-        Pageable pageable = PageRequest.of(page, size, sortBy);
+        Pageable pageable = PageRequest.of(request.getPage(), request.getSize(), sortBy);
         Page<ProductEntity> productPage = productRepository.findAll(spec, pageable);
         List<ProductEntity> productEntityList = productPage.getContent();
 

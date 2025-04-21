@@ -19,6 +19,7 @@ import vn.edu.stu.laptopshop.repository.UserRepository;
 import vn.edu.stu.laptopshop.service.OrderService;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -94,7 +95,7 @@ public class OrderServiceImpl implements OrderService {
         if(userEntity != null && !userEntity.getOrders().isEmpty()) {
             return userEntity.getOrders();
         }
-        return null;
+        return Collections.emptyList();
     }
 
     @Override

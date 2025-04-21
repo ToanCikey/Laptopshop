@@ -8,7 +8,7 @@
 </head>
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
 <div class="bg-white p-8 shadow-md rounded-lg w-96">
-    <h2 class="text-2xl font-semibold text-center mb-6">Đăng ký</h2>
+    <h2 class="text-2xl font-semibold text-center mb-6">Đăng nhập</h2>
 
     <form id="loginForm">
         <div class="mb-4">
@@ -20,23 +20,12 @@
             <label for="password" class="block text-gray-600">Mật khẩu</label>
             <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nhập mật khẩu">
         </div>
-
-        <div class="mb-4">
-            <label for="fullName" class="block text-gray-600">Họ tên</label>
-            <input type="text" id="fullName" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nhập họ tên">
-        </div>
-
-        <div class="mb-4">
-            <label for="phone" class="block text-gray-600">Số điện thoại</label>
-            <input type="text" id="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nhập số điện thoại">
-        </div>
-
-        <button class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300">Đăng ký</button>
+        <button class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300">Đăng nhập</button>
     </form>
 
     <div class="flex justify-center mt-3 text-sm text-gray-600">
-        Bạn đã có tài khoản rồi?
-        <a class="underline decoration-solid px-2 text-blue-500 hover:text-blue-700" href="login.html">Tại đây</a>
+        Bạn chưa có tài khoản?
+        <a class="underline decoration-solid px-2 text-blue-500 hover:text-blue-700" href="register.html">Tại đây</a>
     </div>
 </div>
 
@@ -46,18 +35,14 @@
 
         let email = document.getElementById("email").value;
         let password = document.getElementById("password").value;
-        let fullName = document.getElementById("fullName").value;
-        let phone = document.getElementById("phone").value;
-        let status = "ACTIVE";
-        let type = "USER"
 
         try {
-            let response = await fetch("http://localhost:8080/api/v1/auth/register", {
+            let response = await fetch("http://localhost:8080/api/v1/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ email, password, fullName, phone, status, type })
+                body: JSON.stringify({ email, password })
             });
 
             let data = await response.json();
@@ -65,17 +50,17 @@
             if (response.ok) {
                 await Swal.fire({
                     icon: 'success',
-                    title: 'Đăng ký thành công!',
-                    text: 'Chào mừng bạn đến với Laptopshop! 😊',
-                    confirmButtonText: 'Đi đến Đăng nhập'
-                }).then(() => {
-                    window.location.href = "login.html";
+                    title: 'Đăng nhập thành công!',
+                    text: 'Chào mừng bạn trở lại 😊',
+                    confirmButtonText: 'Tiếp tục'
                 });
+                localStorage.setItem("info", JSON.stringify(data.data));
+                window.location.href = "home.html";
             } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops!',
-                    text: data.message || 'Đăng ký thất bại, vui lòng thử lại!',
+                    text: data.message || 'Đăng nhập thất bại!',
                     confirmButtonText: 'Thử lại'
                 });
             }

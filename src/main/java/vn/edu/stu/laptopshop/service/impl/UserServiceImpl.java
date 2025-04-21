@@ -52,10 +52,16 @@ public class UserServiceImpl implements UserService {
         if(user != null) {
             user.setFullName(request.getFullName());
             user.setPhone(request.getPhone());
-            user.setStatus(request.getStatus());
             user.setAddress(request.getAddress());
-            user.setType(request.getType());
+            
+            if(request.getStatus() != null){
+                user.setStatus(request.getStatus());
+            }
 
+            if(request.getType() != null){
+                user.setType(request.getType());
+            }
+            
             userRepository.save(user);
         }
     }

@@ -1,7 +1,7 @@
 package vn.edu.stu.laptopshop.service;
 
-import vn.edu.stu.laptopshop.controller.request.product.PriceRangeRequest;
 import vn.edu.stu.laptopshop.controller.request.product.ProductCreateRequest;
+import vn.edu.stu.laptopshop.controller.request.product.ProductFilterRequest;
 import vn.edu.stu.laptopshop.controller.request.product.ProductUpdateRequest;
 import vn.edu.stu.laptopshop.controller.response.product.ProductPageResponse;
 import vn.edu.stu.laptopshop.model.ProductEntity;
@@ -13,5 +13,5 @@ public interface ProductService {
     void deleteProduct(Long id);
     void updateProduct(ProductUpdateRequest request);
     ProductEntity getProductById(Long id);
-    ProductPageResponse getProductPageBySearch(List<String> brandNames, List<String> categoryNames, List<PriceRangeRequest> priceRanges, String sort, int page, int size);
+    ProductPageResponse getProductPageBySearch(ProductFilterRequest request);
 }

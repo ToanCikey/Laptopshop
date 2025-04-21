@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang chủ - Laptopshop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <header class="bg-white shadow sticky top-0 z-50">
+      <div
+        class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <h1 class="text-2xl font-bold text-blue-600 cursor-pointer text-[30px]">
+          <a href="home.html">Laptopshop</a>
+        </h1>
+        <nav class="space-x-4 text-lg flex items-center justify-between">
+          <nav class="flex items-center justify-center space-x-4 mr-[100px]">
+            <a
+              href="home.html"
+              id="nav-home"
+              class="text-gray-700 text-[20px] font-bold hover:text-blue-500 mr-2"
+              >Trang chủ</a
+            >
+            <a
+              href="#"
+              id="nav-products"
+              class="text-gray-700 text-[20px] font-bold hover:text-blue-500 mr-2"
+              >Sản phẩm</a
+            >
+            <a
+              href="#"
+              id="nav-contact"
+              class="text-gray-700 text-[20px] font-bold hover:text-blue-500 mr-2"
+              >Liên hệ</a
+            >
+          </nav>
+          <nav class="flex items-center justify-center space-x-4">
+            <div class="relative">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                class="text-black"
+              >
+                <path
+                  fill="currentColor"
+                  d="M0 1h4.764l.545 2h18.078l-3.666 11H7.78l-.5 2H22v2H4.72l1.246-4.989L3.236 3H0zm7.764 11h10.515l2.334-7H5.855zM4 21a2 2 0 1 1 4 0a2 2 0 0 1-4 0m14 0a2 2 0 1 1 4 0a2 2 0 0 1-4 0"
+                />
+              </svg>
+              <div
+                id="cart-count"
+                class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full"
+              >
+                0
+              </div>
+            </div>
+            <a href="register.html" id="nav-register">
+              <button
+                class="bg-green-500 text-white px-5 py-2 rounded-xl shadow-md hover:bg-green-600 transition-all font-semibold"
+              >
+                Đăng ký
+              </button>
+            </a>
+            <a href="login.html" id="nav-login">
+              <button
+                class="bg-blue-500 text-white px-5 py-2 rounded-xl shadow-md hover:bg-blue-600 transition-all font-semibold"
+              >
+                Đăng nhập
+              </button>
+            </a>
+            <div class="relative" id="avatar-wrapper">
+              <div
+                id="avatar-container"
+                class="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500 hover:scale-105 transition-transform duration-300 cursor-pointer"
+              ></div>
+              <div
+                id="dropdown-menu"
+                class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg z-50 py-2 text-gray-700 border"
+              >
+                <a href="info.html" class="block px-4 py-2 hover:bg-gray-100"
+                  >Thông tin cá nhân</a
+                >
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+                  >Đơn hàng của tôi</a
+                >
+                <button
+                  id="logoutBtn"
+                  class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  Đăng xuất
+                </button>
+              </div>
+            </div>
+          </nav>
+        </nav>
+      </div>
+    </header>
+    <main class="max-w-7xl mx-auto p-6">
+      <div class="mb-6">
+        <a
+          href="home.html"
+          class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transition duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 mr-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          Quay về trang chủ
+        </a>
+      </div>
+      <div class="mb-3">
+        <h1 class="text-2xl font-bold text-gray-800">Danh sách đơn hàng</h1>
+      </div>
+      <div class="max-w-7xl mx-auto px-4 py-10">
+        <div class="overflow-x-auto rounded-xl shadow-md">
+          <table
+            class="min-w-full text-sm text-gray-800 bg-white border border-gray-200"
+          >
+            <thead
+              class="bg-gray-100 text-xs text-gray-600 uppercase tracking-wider"
+            >
+              <tr>
+                <th class="px-6 py-4 border-b border-gray-200 text-left">ID</th>
+                <th class="px-6 py-4 border-b border-gray-200 text-left">
+                  Ngày đặt hàng
+                </th>
+                <th class="px-6 py-4 border-b border-gray-200 text-left">
+                  Tổng tiền
+                </th>
+                <th class="px-6 py-4 border-b border-gray-200 text-left">
+                  Trạng thái
+                </th>
+                <th class="px-6 py-4 border-b border-gray-200 text-center">
+                  Chi tiết
+                </th>
+                <th class="px-6 py-4 border-b border-gray-200 text-center">
+                  Hủy đơn hàng
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="divide-y divide-gray-100"
+              id="productTableBody"
+            ></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    <footer
+      class="bg-white border-t mt-10 py-6 text-center text-gray-600 mt-[200px]"
+    >
+      &copy; 2025 Laptopshop. Bản quyền thuộc về Nguyễn Văn Toàn
+    </footer>
+    <script>
+      let orders = [];
+      const userInfo = localStorage.getItem("info");
+      const avatarContainer = document.getElementById("avatar-container");
+      let userId;
+
+      if (userInfo) {
+        const parsedInfo = JSON.parse(userInfo);
+        userId = parsedInfo.id;
+        document.getElementById("nav-register").style.display = "none";
+        document.getElementById("nav-login").style.display = "none";
+        avatarContainer.innerHTML = `<img src="${parsedInfo.image}" alt="Ảnh cá nhân" class="w-full h-full object-cover" />`;
+      } else {
+        document.getElementById("nav-register").style.display = "block";
+        document.getElementById("nav-login").style.display = "block";
+        document.getElementById("avatar-container").style.display = "none";
+      }
+
+      async function loadOrders() {
+        try {
+          const response = await fetch(
+            `http://localhost:8080/api/v1/order/order-user/${userId}`
+          );
+          const data = await response.json();
+          if (response.ok) {
+            orders = data.data || [];
+            loadOrdersHtml();
+          }
+        } catch (error) {
+          console.error("Lỗi:", error);
+        }
+      }
+
+      function formatCurrency(amount) {
+        return new Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(amount);
+      }
+
+      function formatDateTime(rawDate) {
+        const date = new Date(rawDate);
+
+        return `${date.getDate()} tháng ${
+          date.getMonth() + 1
+        }, ${date.getFullYear()}, ${date.getHours()}:${String(
+          date.getMinutes()
+        ).padStart(2, "0")}:${String(date.getSeconds()).padStart(2, "0")}`;
+      }
+
+      function loadOrdersHtml() {
+        const tableBody = document.getElementById("productTableBody");
+        tableBody.innerHTML = "";
+
+        if (orders.length === 0) {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+      <td colspan="5" class="text-center text-gray-500 py-4">
+        Không có đơn hàng nào
+      </td>
+    `;
+          tableBody.appendChild(row);
+          return;
+        } else {
+          orders.forEach((order) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+        <td class="px-6 py-4 border-b border-gray-200 text-[16px]">${
+          order.id
+        }</td>
+        <td class="px-6 py-4 border-b border-gray-200 text-[16px]">${formatDateTime(
+          order.orderDate
+        )}</td>
+        <td class="px-6 py-4 border-b border-gray-200  text-[16px]">${formatCurrency(
+          order.totalAmount
+        )}</td>
+        <td class="px-6 py-4 border-b border-gray-200 text-[16px]">
+          <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+            order.status === "Đã giao"
+              ? "bg-green-100 text-green-700"
+              : "bg-yellow-100 text-yellow-700"
+          }">
+            ${order.status}
+          </span>
+        </td>
+        <td class="px-6 py-4 border-b border-gray-200 text-center text-[16px]">
+          <a href="#" class="text-sm text-blue-600 hover:underline">Xem chi tiết</a>
+        </td>
+        <td class="px-6 py-4 border-b border-gray-200 text-[16px] text-center">
+            <button class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300">
+            Hủy
+            </button>
+        </td>
+      `;
+            tableBody.appendChild(row);
+          });
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", loadOrders);
+
+      const path = window.location.pathname;
+      if (path.includes("home")) {
+        document
+          .getElementById("nav-home")
+          ?.classList.add("border-b-2", "border-red-900");
+      } else if (path.includes("products")) {
+        document
+          .getElementById("nav-products")
+          ?.classList.add("border-b-2", "border-blue-600");
+      } else if (path.includes("contact")) {
+        document
+          .getElementById("nav-contact")
+          ?.classList.add("border-b-2", "border-blue-600");
+      }
+
+      const avatar = document.getElementById("avatar-container");
+      const dropdown = document.getElementById("dropdown-menu");
+
+      avatar?.addEventListener("click", () => {
+        dropdown.classList.toggle("hidden");
+      });
+
+      window.addEventListener("click", function (e) {
+        if (!document.getElementById("avatar-wrapper")?.contains(e.target)) {
+          dropdown?.classList.add("hidden");
+        }
+      });
+
+      document.getElementById("logoutBtn")?.addEventListener("click", () => {
+        Swal.fire({
+          title: "Bạn có chắc chắn muốn đăng xuất?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Đăng xuất",
+          cancelButtonText: "Hủy",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            localStorage.removeItem("info");
+            window.location.href = "login.html";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

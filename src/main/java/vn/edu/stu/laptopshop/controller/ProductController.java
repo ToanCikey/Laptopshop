@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import vn.edu.stu.laptopshop.controller.request.product.PriceRangeRequest;
 import vn.edu.stu.laptopshop.controller.request.product.ProductCreateRequest;
 import vn.edu.stu.laptopshop.controller.request.product.ProductFilterRequest;
 import vn.edu.stu.laptopshop.controller.request.product.ProductUpdateRequest;
@@ -45,24 +44,23 @@ public class ProductController {
     }
 
     @Operation(summary = "Update product", description = "API update product to database")
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseSuccess<?> updateProduct(@Valid @RequestBody ProductUpdateRequest request){
         productService.updateProduct(request);
         return new ResponseSuccess<>(HttpStatus.NO_CONTENT.value(), "Product updated successfully");
     }
 
     @Operation(summary = "Delete product", description = "API delete product to database")
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseSuccess<?> deleteProduct(@Min(1) @PathVariable Long id){
         productService.deleteProduct(id);
         return new ResponseSuccess<>(HttpStatus.NO_CONTENT.value(), "Product delete successfully");
     }
 
     @Operation(summary = "Filter products", description = "API filter products to database")
-    @GetMapping("/filter")
+    @PostMapping("/filter")
     public ResponseSuccess<?> filterProduct(@RequestBody ProductFilterRequest request) {
-        ProductPageResponse productPageResponse = productService.getProductPageBySearch(request.getBrandNames(),
-                request.getCategoryNames(), request.getPriceRanges(), request.getSort(), request.getPage(), request.getSize());
+        ProductPageResponse productPageResponse = productService.getProductPageBySearch(request);
         return new ResponseSuccess<>(HttpStatus.OK.value(), "Filter products successfully", productPageResponse);
     }
 }

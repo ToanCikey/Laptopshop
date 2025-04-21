@@ -14,6 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductSpecification {
+    public static Specification<ProductEntity> findByKeyWord(String keyword) {
+            return (root, query, cb) -> {
+                if (keyword == null || keyword.isEmpty()) return cb.conjunction();
+                String likePattern = "%" + keyword + "%";
+                
+                return cb.like(root.get("name"), likePattern);
+            };
+        }
+
     public static Specification<ProductEntity> filterByBrandNames(List<String> brandNames) {
         return (root, query, cb) -> {
             if (brandNames == null || brandNames.isEmpty()) return cb.conjunction();

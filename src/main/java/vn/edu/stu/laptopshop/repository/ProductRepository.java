@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<ProductEntity, Long>, JpaSpecificationExecutor<ProductEntity> {
     @Query("SELECT u FROM ProductEntity u WHERE " +
             "LOWER(u.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "LOWER(u.brand) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "LOWER(u.brand.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(u.description) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "CAST(u.price AS string) LIKE CONCAT('%', :keyword, '%')")
     List<ProductEntity> getAllBySearch(String keyword);

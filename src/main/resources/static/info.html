@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang chủ - Laptopshop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <header class="bg-white shadow sticky top-0 z-50">
+      <div
+        class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <h1 class="text-2xl font-bold text-blue-600 cursor-pointer text-[30px]">
+          <a href="home.html">Laptopshop</a>
+        </h1>
+
+        <nav class="space-x-4 text-lg flex items-center justify-between">
+          <nav class="flex items-center justify-center space-x-4 mr-[100px]">
+            <a
+              href="home.html"
+              id="nav-home"
+              class="text-gray-700 text-[20px] font-bold hover:text-blue-500 mr-2"
+              >Trang chủ</a
+            >
+            <a
+              href="#"
+              id="nav-products"
+              class="text-gray-700 text-[20px] font-bold hover:text-blue-500 mr-2"
+              >Sản phẩm</a
+            >
+            <a
+              href="#"
+              id="nav-contact"
+              class="text-gray-700 text-[20px] font-bold hover:text-blue-500 mr-2"
+              >Liên hệ</a
+            >
+          </nav>
+          <nav class="flex items-center justify-center space-x-4">
+            <div class="relative">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                class="text-black"
+              >
+                <path
+                  fill="currentColor"
+                  d="M0 1h4.764l.545 2h18.078l-3.666 11H7.78l-.5 2H22v2H4.72l1.246-4.989L3.236 3H0zm7.764 11h10.515l2.334-7H5.855zM4 21a2 2 0 1 1 4 0a2 2 0 0 1-4 0m14 0a2 2 0 1 1 4 0a2 2 0 0 1-4 0"
+                />
+              </svg>
+
+              <div
+                id="cart-count"
+                class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full"
+              >
+                0
+              </div>
+            </div>
+
+            <a href="register.html" id="nav-register">
+              <button
+                class="bg-green-500 text-white px-5 py-2 rounded-xl shadow-md hover:bg-green-600 transition-all font-semibold"
+              >
+                Đăng ký
+              </button>
+            </a>
+
+            <a href="login.html" id="nav-login">
+              <button
+                class="bg-blue-500 text-white px-5 py-2 rounded-xl shadow-md hover:bg-blue-600 transition-all font-semibold"
+              >
+                Đăng nhập
+              </button>
+            </a>
+
+            <div class="relative" id="avatar-wrapper">
+              <div
+                id="avatar-container"
+                class="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500 hover:scale-105 transition-transform duration-300 cursor-pointer"
+              ></div>
+
+              <div
+                id="dropdown-menu"
+                class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg z-50 py-2 text-gray-700 border"
+              >
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+                  >Thông tin cá nhân</a
+                >
+                <a href="order.html" class="block px-4 py-2 hover:bg-gray-100"
+                  >Đơn hàng của tôi</a
+                >
+                <button
+                  id="logoutBtn"
+                  class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  Đăng xuất
+                </button>
+              </div>
+            </div>
+          </nav>
+        </nav>
+      </div>
+    </header>
+    <main class="max-w-4xl mx-auto p-6">
+      <div class="mb-6">
+        <a
+          href="home.html"
+          class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transition duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 mr-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          Quay về trang chủ
+        </a>
+      </div>
+
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">Thông tin cá nhân</h1>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-md">
+        <form class="space-y-4">
+          <div>
+            <label class="block text-gray-700 font-medium mb-1" for="fullName"
+              >Họ và tên</label
+            >
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label class="block text-gray-700 font-medium mb-1" for="email"
+              >Email</label
+            >
+            <input
+              disabled
+              type="email"
+              id="email"
+              name="email"
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label class="block text-gray-700 font-medium mb-1" for="phone"
+              >Số điện thoại</label
+            >
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label class="block text-gray-700 font-medium mb-1" for="address"
+              >Địa chỉ</label
+            >
+            <input
+              type="text"
+              id="address"
+              name="address"
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div class="pt-4">
+            <button
+              id="submit_info"
+              type="submit"
+              class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition duration-200"
+            >
+              Cập nhật thông tin
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer class="bg-white border-t mt-10 py-6 text-center text-gray-600">
+      &copy; 2025 Laptopshop. Bản quyền thuộc về Nguyễn Văn Toàn
+    </footer>
+
+    <script>
+      const userInfo = localStorage.getItem("info");
+      const avatarContainer = document.getElementById("avatar-container");
+      const fullName = document.getElementById("fullName");
+      const email = document.getElementById("email");
+      const phone = document.getElementById("phone");
+      const address = document.getElementById("address");
+      let id;
+
+      if (userInfo) {
+        const parsedInfo = JSON.parse(userInfo);
+        fullName.value = parsedInfo.fullName;
+        email.value = parsedInfo.email;
+        phone.value = parsedInfo.phone;
+        address.value = parsedInfo.address;
+        id = parsedInfo.id;
+        document.getElementById("nav-register").style.display = "none";
+        document.getElementById("nav-login").style.display = "none";
+        avatarContainer.innerHTML = `
+          <img src="${parsedInfo.image}" alt="Ảnh cá nhân" class="w-full h-full object-cover" />
+        `;
+      } else {
+        document.getElementById("nav-register").style.display = "block";
+        document.getElementById("nav-login").style.display = "block";
+        document.getElementById("avatar-container").style.display = "none";
+      }
+
+      document
+        .getElementById("submit_info")
+        .addEventListener("click", (event) => {
+          event.preventDefault();
+          Swal.fire({
+            title: "Bạn có chắc chắn muốn cập nhật không ?",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonText: "Cập nhật",
+            cancelButtonText: "Hủy",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              updateInfo();
+            }
+          });
+        });
+
+      async function updateInfo() {
+        const info = {
+          id: id,
+          fullName: fullName.value,
+          phone: phone.value,
+          address: address.value,
+        };
+
+        try {
+          const response = await fetch(
+            "http://localhost:8080/api/v1/user/update",
+            {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(info),
+            }
+          );
+
+          const data = await response.json();
+
+          if (response.ok) {
+            Swal.fire(
+              "Thành công",
+              "Cập nhật thông tin thành công!",
+              "success"
+            );
+            localStorage.setItem(
+              "info",
+              JSON.stringify({
+                ...JSON.parse(localStorage.getItem("info")),
+                ...info,
+              })
+            );
+          } else {
+            Swal.fire("Lỗi", data.message || "Không thể cập nhật!", "error");
+          }
+        } catch (error) {
+          console.error("Lỗi:", error);
+          Swal.fire("Lỗi", "Có lỗi xảy ra khi cập nhật", "error");
+        }
+      }
+
+      const path = window.location.pathname;
+
+      if (path.includes("home")) {
+        document
+          .getElementById("nav-home")
+          ?.classList.add("border-b-2", "border-red-900");
+      } else if (path.includes("products")) {
+        document
+          .getElementById("nav-products")
+          ?.classList.add("border-b-2", "border-blue-600");
+      } else if (path.includes("contact")) {
+        document
+          .getElementById("nav-contact")
+          ?.classList.add("border-b-2", "border-blue-600");
+      }
+
+      const avatar = document.getElementById("avatar-container");
+      const dropdown = document.getElementById("dropdown-menu");
+
+      avatar?.addEventListener("click", () => {
+        dropdown.classList.toggle("hidden");
+      });
+
+      window.addEventListener("click", function (e) {
+        if (!document.getElementById("avatar-wrapper")?.contains(e.target)) {
+          dropdown?.classList.add("hidden");
+        }
+      });
+
+      document.getElementById("logoutBtn")?.addEventListener("click", () => {
+        Swal.fire({
+          title: "Bạn có chắc chắn muốn đăng xuất?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Đăng xuất",
+          cancelButtonText: "Hủy",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            localStorage.removeItem("info");
+            window.location.href = "login.html";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

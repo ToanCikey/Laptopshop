@@ -37,7 +37,7 @@ public class CategoryController {
     }
 
     @Operation(summary = "Update category", description = "API update category to database")
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseSuccess<?> updateCategory(@Valid @RequestBody CategoryUpdateRequest request) {
         categoryService.updateCategory(request);
 
@@ -45,7 +45,7 @@ public class CategoryController {
     }
 
     @Operation(summary = "Delete brand", description = "API delete category to database")
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseSuccess<?> deleteCategory(@Min(1) @PathVariable Long id) {
         categoryService.deleteCategory(id);
 

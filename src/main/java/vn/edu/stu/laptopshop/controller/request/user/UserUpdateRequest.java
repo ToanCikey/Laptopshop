@@ -23,9 +23,7 @@ public class UserUpdateRequest {
     @Size(min = 10, message = "Address minimum 10 characters")
     private String address;
 
-    @NotNull(message = "UserStatus must not be null")
     private UserStatus status;
 
-    @NotNull(message = "UserType must not be null")
     private UserType type;
 }

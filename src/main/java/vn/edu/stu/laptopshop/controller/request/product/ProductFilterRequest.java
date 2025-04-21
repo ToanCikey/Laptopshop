@@ -8,6 +8,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ProductFilterRequest {
+    private String keyword;
     private List<String> brandNames;
     private List<String> categoryNames;
     private List<PriceRangeRequest> priceRanges;

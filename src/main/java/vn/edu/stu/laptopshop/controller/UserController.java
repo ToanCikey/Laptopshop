@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @Operation(summary = "Update User", description = "API update user to database")
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseSuccess<?> updateUser(@Valid @RequestBody UserUpdateRequest request) {
         userService.updateUser(request);
 

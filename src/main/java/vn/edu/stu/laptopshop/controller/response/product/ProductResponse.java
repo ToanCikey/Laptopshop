@@ -2,6 +2,8 @@ package vn.edu.stu.laptopshop.controller.response.product;
 
 import lombok.Getter;
 import lombok.Setter;
+import vn.edu.stu.laptopshop.controller.response.brand.BrandResponse;
+import vn.edu.stu.laptopshop.controller.response.category.CategoryResponse;
 
 import java.time.LocalDateTime;
 
@@ -21,9 +23,9 @@ public class ProductResponse {
 
     private String imageUrl;
 
-    private Long brandId;
+    private BrandResponse brand;
 
-    private Long categoryId;
+    private CategoryResponse category;
 
     private LocalDateTime createdAt;
 
