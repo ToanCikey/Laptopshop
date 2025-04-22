@@ -40,12 +40,17 @@ public class OrderServiceImpl implements OrderService {
         orderEntity.setUser(userEntity);
         orderEntity.setOrderDate(LocalDateTime.now());
         orderEntity.setStatus(OrderStatus.PENDING);
+        orderEntity.setReceiverName(userEntity.getFullName());
 
         if(userEntity.getAddress().isEmpty()){
             throw new InvalidDataException("User please update delivery address");
+        }else{
+            orderEntity.setReceiverAddress(userEntity.getAddress());
         }
         if(userEntity.getPhone().isEmpty()){
             throw new InvalidDataException("Users please update phone number to receive goods");
+        }else{
+            orderEntity.setReceiverPhone(userEntity.getPhone());
         }
 
         double totalAmount = 0;

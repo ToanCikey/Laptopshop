@@ -21,4 +21,6 @@ public class OrderDetailResponse {
     private Long orderId;
 
     private Long productId;
+
+    private String productName;
 }

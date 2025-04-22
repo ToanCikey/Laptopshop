@@ -26,6 +26,15 @@ public class OrderEntity {
     @Column(name = "orderDate")
     private LocalDateTime orderDate;
 
+    @Column(name = "receiverName", length = 255)
+    private String receiverName;
+
+    @Column(name = "receiverPhone", length = 255)
+    private String receiverPhone;
+
+    @Column(name = "receiverAddress", length = 255)
+    private String receiverAddress;
+
     @Column(name = "totalAmount")
     private Double totalAmount;
 

@@ -63,4 +63,10 @@ public class ProductController {
         ProductPageResponse productPageResponse = productService.getProductPageBySearch(request);
         return new ResponseSuccess<>(HttpStatus.OK.value(), "Filter products successfully", productPageResponse);
     }
+
+    @Operation(summary = "Get product by id", description = "API get product by id to database")
+    @GetMapping("/{id}")
+    public ResponseSuccess<?> getProductById(@Min(1) @PathVariable Long id) {
+        return new ResponseSuccess<>(HttpStatus.OK.value(), "Get product by id successfully", productMapper.toProductResponse(productService.getProductById(id)));
+    }
 }

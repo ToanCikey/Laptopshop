@@ -23,7 +23,13 @@ public class OrderMapper {
         }
         if (orderEntity.getOrderDetails() != null && !orderEntity.getOrderDetails().isEmpty()) {
             orderResponse.setOrderDetails(orderEntity.getOrderDetails().stream()
-                    .map(order -> modelMapper.map(order, OrderDetailResponse.class))
+                    .map(
+                    order -> {
+                        OrderDetailResponse orderDetail = new OrderDetailResponse();  
+                         modelMapper.map(order, orderDetail);
+                         orderDetail.setProductName(order.getProduct().getName()); 
+                         return orderDetail;
+                    })
                     .toList());
         }
         return orderResponse;

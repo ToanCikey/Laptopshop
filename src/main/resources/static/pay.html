@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang chủ - Laptopshop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <header class="bg-white shadow sticky top-0 z-50">
+      <div
+        class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <h1 class="text-2xl font-bold text-blue-600 cursor-pointer text-[30px]">
+          <a href="home.html">Laptopshop</a>
+        </h1>
+        <nav class="space-x-4 text-lg flex items-center justify-between">
+          <nav class="flex items-center justify-center space-x-4 mr-[100px]">
+            <a
+              href="home.html"
+              id="nav-home"
+              class="text-gray-700 text-[20px] font-bold hover:text-blue-500 mr-2"
+              >Trang chủ</a
+            >
+            <a
+              href="#"
+              id="nav-products"
+              class="text-gray-700 text-[20px] font-bold hover:text-blue-500 mr-2"
+              >Sản phẩm</a
+            >
+            <a
+              href="#"
+              id="nav-contact"
+              class="text-gray-700 text-[20px] font-bold hover:text-blue-500 mr-2"
+              >Liên hệ</a
+            >
+          </nav>
+          <nav class="flex items-center justify-center space-x-4">
+            <div class="relative">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                class="text-black"
+              >
+                <path
+                  fill="currentColor"
+                  d="M0 1h4.764l.545 2h18.078l-3.666 11H7.78l-.5 2H22v2H4.72l1.246-4.989L3.236 3H0zm7.764 11h10.515l2.334-7H5.855zM4 21a2 2 0 1 1 4 0a2 2 0 0 1-4 0m14 0a2 2 0 1 1 4 0a2 2 0 0 1-4 0"
+                />
+              </svg>
+              <div
+                id="cart-count"
+                class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full"
+              >
+                0
+              </div>
+            </div>
+            <a href="register.html" id="nav-register">
+              <button
+                class="bg-green-500 text-white px-5 py-2 rounded-xl shadow-md hover:bg-green-600 transition-all font-semibold"
+              >
+                Đăng ký
+              </button>
+            </a>
+            <a href="login.html" id="nav-login">
+              <button
+                class="bg-blue-500 text-white px-5 py-2 rounded-xl shadow-md hover:bg-blue-600 transition-all font-semibold"
+              >
+                Đăng nhập
+              </button>
+            </a>
+            <div class="relative" id="avatar-wrapper">
+              <div
+                id="avatar-container"
+                class="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500 hover:scale-105 transition-transform duration-300 cursor-pointer"
+              ></div>
+              <div
+                id="dropdown-menu"
+                class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg z-50 py-2 text-gray-700 border"
+              >
+                <a href="info.html" class="block px-4 py-2 hover:bg-gray-100"
+                  >Thông tin cá nhân</a
+                >
+                <a href="order.html" class="block px-4 py-2 hover:bg-gray-100"
+                  >Đơn hàng của tôi</a
+                >
+                <button
+                  id="logoutBtn"
+                  class="w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  Đăng xuất
+                </button>
+              </div>
+            </div>
+          </nav>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-6">
+      <div class="mb-6">
+        <a
+          href="cart.html"
+          class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transition duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 mr-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          Quay về giỏ hàng
+        </a>
+      </div>
+
+      <div class="mb-6">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">Đơn hàng của bạn</h1>
+
+        <div class="bg-white rounded-xl shadow-md p-6 space-y-3">
+          <h3 class="text-xl font-semibold text-gray-800">
+            Thông tin nhận hàng
+          </h3>
+          <p class="text-lg">
+            <span class="font-semibold">Họ và tên:</span>
+            <span id="hovaten" class="ml-2"></span>
+          </p>
+          <p class="text-lg">
+            <span class="font-semibold">Số điện thoại:</span>
+            <span id="sdt" class="ml-2"></span>
+          </p>
+          <p class="text-lg">
+            <span class="font-semibold">Địa chỉ nhận hàng:</span>
+            <span id="diachi" class="ml-2"></span>
+          </p>
+          <a href="info.html">
+            <button
+              class="mt-4 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition font-semibold"
+            >
+              Chỉnh sửa thông tin
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">
+          Thông tin sản phẩm
+        </h3>
+        <div id="cart-container" class="space-y-4"></div>
+      </div>
+
+      <div
+        id="cart-summary"
+        class="hidden bg-white rounded-xl shadow-md p-6 mt-4"
+      >
+        <p id="total-price" class="text-2xl font-bold text-red-600 mb-6">
+          Tổng tiền: 0đ
+        </p>
+        <div class="mb-6">
+          <label for="payment-method" class="block text-lg font-semibold mb-2"
+            >Phương thức thanh toán</label
+          >
+          <select
+            id="payment-method"
+            class="w-full max-w-md p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+            <option value="momo">Ví MoMo</option>
+            <option value="bank">Chuyển khoản ngân hàng</option>
+          </select>
+        </div>
+        <button
+          id="payment"
+          class="bg-red-600 text-white px-7 py-3 rounded-xl text-lg font-semibold hover:bg-red-700 transition"
+        >
+          Thanh Toán
+        </button>
+      </div>
+    </main>
+
+    <footer
+      class="bg-white border-t mt-10 py-6 text-center text-gray-600 mt-[200px]"
+    >
+      &copy; 2025 Laptopshop. Bản quyền thuộc về Nguyễn Văn Toàn
+    </footer>
+
+    <script>
+      const info = JSON.parse(localStorage.getItem("info"));
+      document.getElementById("hovaten").textContent = info.fullName;
+      document.getElementById("sdt").textContent = info.phone;
+      document.getElementById("diachi").textContent = info.address;
+
+      async function getProductById() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        if (cart.length === 0) {
+          document.getElementById(
+            "cart-container"
+          ).innerHTML = `<p class="text-gray-600 text-center">Giỏ hàng trống.</p>`;
+          updateCartSummary([]);
+          return;
+        }
+
+        const products = [];
+
+        try {
+          for (let i = 0; i < cart.length; i++) {
+            const productId = cart[i].productId;
+
+            const response = await fetch(
+              `http://localhost:8080/api/v1/product/${productId}`,
+              {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+              }
+            );
+
+            if (response.ok) {
+              const productData = await response.json();
+              products.push({
+                ...productData.data,
+                quantity: cart[i].quantity,
+              });
+            } else {
+              console.error(`Không tìm thấy sản phẩm với ID ${productId}`);
+            }
+          }
+
+          renderCartDetails(products);
+        } catch (error) {
+          console.error("Lỗi khi lấy thông tin sản phẩm:", error);
+          Swal.fire("Lỗi", "Không thể tải thông tin sản phẩm", "error");
+        }
+      }
+
+      function updateCartSummary(products) {
+        const summary = document.getElementById("cart-summary");
+        const totalPriceElem = document.getElementById("total-price");
+
+        if (!products || products.length === 0) {
+          summary.classList.add("hidden");
+          totalPriceElem.textContent = "";
+          return;
+        }
+
+        const total = products.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
+        totalPriceElem.textContent = `Tổng tiền: ${formatCurrency(total)}`;
+        summary.classList.remove("hidden");
+      }
+
+      function renderCartDetails(products) {
+        const container = document.getElementById("cart-container");
+        container.innerHTML = "";
+
+        products.forEach((product) => {
+          const productHtml = `
+      <div class="flex flex-wrap md:flex-nowrap items-center bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+        <img src="${product.imageUrl}" alt="${
+            product.name
+          }" class="w-24 h-24 object-cover rounded-lg border mr-6" />
+
+        <div class="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <p class="text-gray-800 font-medium">Tên: <span class="font-semibold">${
+            product.name
+          }</span></p>
+          <p class="text-gray-800">Giá: <span class="text-blue-600 font-semibold">${formatCurrency(
+            product.price
+          )}</span></p>
+          <p class="text-gray-800">Số lượng: <span class="font-semibold">${
+            product.quantity
+          }</span></p>
+          <p class="text-gray-800">Thành tiền: <span class="text-blue-600 font-semibold">${formatCurrency(
+            product.quantity * product.price
+          )}</span></p>
+        </div>
+      </div>
+    `;
+          container.innerHTML += productHtml;
+        });
+
+        updateCartSummary(products);
+      }
+
+      document.getElementById("payment").addEventListener("click", () => {
+        const selectedMethod = document.getElementById("payment-method").value;
+
+        switch (selectedMethod) {
+          case "cod":
+            const info = getInfoOrder();
+            createOrder(info);
+            break;
+          case "momo":
+            Swal.fire("Hướng dẫn", "Chức năng đang được cập nhật", "info");
+            break;
+          case "bank":
+            Swal.fire("Hướng dẫn", "Chức năng đang được cập nhật", "info");
+            break;
+          default:
+            Swal.fire("Lỗi", "Vui lòng chọn phương thức thanh toán", "error");
+        }
+      });
+
+      function getInfoOrder() {
+        const receiverName = info.fullName;
+        const receiverAddress = info.address;
+        const receiverPhone = info.phone;
+        const userId = info.id;
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const items = cart.map((item) => ({
+          productId: item.productId,
+          quantity: item.quantity,
+        }));
+        return {
+          receiverName: receiverName,
+          receiverAddress: receiverAddress,
+          receiverPhone: receiverPhone,
+          userId: userId,
+          items: items,
+        };
+      }
+
+      async function createOrder(info = {}) {
+        try {
+          let response = await fetch(
+            "http://localhost:8080/api/v1/order/create",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(info),
+            }
+          );
+
+          let data = await response.json();
+
+          if (response.ok) {
+            await Swal.fire({
+              icon: "success",
+              title: "Tạo đơn hàng ",
+              text: "Tạo đơn hàng thành công",
+              confirmButtonText: "Tiếp tục",
+            });
+            localStorage.removeItem("cart");
+            updateCartCount();
+            window.location.href = "order.html";
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops!",
+              text: data.message || "Tạo đơn hàng thất bại!",
+              confirmButtonText: "Thử lại",
+            });
+          }
+        } catch (error) {
+          Swal.fire({
+            icon: "warning",
+            title: "Lỗi tạo đơn hàng",
+            text: "Bạn hãy thử tạo lại xem !",
+          });
+          console.error("Lỗi:", error);
+        }
+      }
+
+      getProductById();
+    </script>
+    <script src="./js/formatMoney.js"></script>
+    <script src="./js/avatar.js"></script>
+    <script src="./js/borderheader.js"></script>
+    <script src="./js/dropdownavatar.js"></script>
+    <script src="./js/logout.js"></script>
+    <script src="./js/updatecartcount.js"></script>
+  </body>
+</html>
