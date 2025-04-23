@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trang chủ - Laptopshop</title>
+    <title>Chi tiết đơn hàng - Laptopshop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
@@ -137,9 +137,20 @@
             <strong>Trạng thái:</strong>
             <span
               id="status"
-              class="inline-block px-2 py-1 rounded-full text-sm font-semibold bg-red-100 text-red-600"
-              >CANCELLED</span
-            >
+              class="inline-block px-2 py-1 rounded-full text-sm font-semibold bg-green-100 text-black-600"
+            ></span>
+          </p>
+          <p>
+            <strong>Người nhận hàng:</strong>
+            <span id="receiverName"></span>
+          </p>
+          <p>
+            <strong>Số điện thoại:</strong>
+            <span id="receiverPhone"></span>
+          </p>
+          <p>
+            <strong>Địa chỉ:</strong>
+            <span id="receiverAddress"></span>
           </p>
           <p>
             <strong>Tổng tiền:</strong>
@@ -194,6 +205,13 @@
 
       function loadData() {
         document.getElementById("orderId").textContent = products.id;
+        document.getElementById("status").textContent = products.status;
+        document.getElementById("receiverName").textContent =
+          products.receiverName;
+        document.getElementById("receiverPhone").textContent =
+          products.receiverPhone;
+        document.getElementById("receiverAddress").textContent =
+          products.receiverAddress;
         document.getElementById("orderDate").textContent = formatDateTime(
           products.orderDate
         );

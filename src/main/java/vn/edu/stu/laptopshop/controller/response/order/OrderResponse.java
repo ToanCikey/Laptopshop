@@ -26,5 +26,11 @@ public class OrderResponse {
 
     private Long userId;
 
+    private String receiverName;
+
+    private String receiverPhone;
+
+    private String receiverAddress;
+
     private List<OrderDetailResponse> orderDetails;
 }

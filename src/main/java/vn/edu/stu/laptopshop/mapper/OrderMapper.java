@@ -27,7 +27,7 @@ public class OrderMapper {
                     order -> {
                         OrderDetailResponse orderDetail = new OrderDetailResponse();  
                          modelMapper.map(order, orderDetail);
-                         orderDetail.setProductName(order.getProduct().getName()); 
+                         orderDetail.setProductName(order.getProduct().getName());
                          return orderDetail;
                     })
                     .toList());

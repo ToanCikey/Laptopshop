@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trang chủ - Laptopshop</title>
+    <title>Thông tin cá nhân - Laptopshop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
@@ -38,7 +38,7 @@
             >
           </nav>
           <nav class="flex items-center justify-center space-x-4">
-            <div class="relative">
+            <div class="relative" id="cart">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="28"
@@ -285,6 +285,9 @@
           Swal.fire("Lỗi", "Có lỗi xảy ra khi cập nhật", "error");
         }
       }
+      document.getElementById("cart").addEventListener("click", () => {
+        window.location.href = "cart.html";
+      });
     </script>
 
     <script src="./js/borderheader.js"></script>
