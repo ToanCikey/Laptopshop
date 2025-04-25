@@ -291,8 +291,22 @@
       }
 
       document.getElementById("checkoutBtn").addEventListener("click", () => {
-        window.location.href = "pay.html";
+        if (localStorage.getItem("info")) {
+          window.location.href = "pay.html";
+        } else {
+          Swal.fire({
+            title: "Bạn chưa đăng nhập website",
+            text: "Vui lòng đăng nhập để tiếp tục.",
+            icon: "info",
+            confirmButtonText: "OK",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "login.html";
+            }
+          });
+        }
       });
+
       getProductById();
     </script>
     <script src="./js/formatMoney.js"></script>

@@ -444,11 +444,12 @@
             product.name
           }" class="w-full h-52 object-cover rounded-lg transition transform hover:scale-105">
           </div>
-          <button onClick = "addProduct(${
-            product.id
-          })" class="text-xl font-bold mt-3 text-gray-800 truncate"><a href="productdetail.html" class="text-xl font-bold mt-3 text-gray-800 truncate">
-            ${product.name}
-          </a></button>
+          <button onClick="addProduct(${product.id})" class="text-xl font-bold mt-3 text-gray-800">
+            <a href="productdetail.html"
+               class="block text-xl font-bold text-gray-800 overflow-hidden whitespace-nowrap truncate w-40">
+              ${product.name}
+            </a>
+          </button>
           <p class="text-gray-500 text-md mt-1">Thương hiệu: ${
             product.brand.name || "Thương hiệu không xác định"
           }</p>
